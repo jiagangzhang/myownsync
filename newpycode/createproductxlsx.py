@@ -25,55 +25,76 @@ from openpyxl import load_workbook
 # # Save the file
 # wb.save("sample.xlsx")
 
-wb=load_workbook('dataheavy_products_py.xlsx')
+wb=load_workbook('dataheavy_product_verify.xlsx')
 ws=wb.active
 
 
-howmanynewproducts=1000
+howmanynewproducts=3000
 exist_count=0
+delete_exist=1
+columnlist=[]
+first_row_cache=[]
 
-for row in ws.iter_rows(min_row=1, max_col=1):
+for row in ws.iter_rows(min_row=2, max_col=1):
     for cell in row:
         if cell.value and len(cell.value)>0:
             # print(cell.value)
             exist_count+=1
-
 print ('Exist:',exist_count)
-# for i in range(1,100):
-#     a=ws['A%d'%(i)]
-#     if a.value and len(a.value)>0:
-#         print(a.value)
-#         count+=1
+
+#  create column from A,B,C to AL,AM
+def iter_all_strings():
+    size = 1
+    while True:
+        for s in itertools.product(ascii_uppercase, repeat=size):
+            yield "".join(s)
+        size +=1
+
+for s in itertools.islice(iter_all_strings(), 39):
+    columnlist.append(s)
+for s in columnlist:
+    first_row_cache.append(ws['%s2'%s].value)
+
+def delete_rows(start,howmanyrows,columns):
+    for i in range(start,howmanyrows):
+        for s in columns:
+            ws['%s%d'%(s,i)]=None
+
+
+if delete_exist:
+    delete_rows(2,exist_count,columnlist)
+    exist_count=1
+
 
 for i in range(exist_count+1,exist_count+howmanynewproducts+1,4):
     randstr=''.join(random.choice('0123456789'+ascii_uppercase) for a in range(11))
-    for k,v in {'-PINK-S':123,'-PINK-M':456,'-PINK-L':789,'-PINK-XL':101}.items():
+    for k,v in {'-PINK-S':['123','S'],'-PINK-M':['456','M'],'-PINK-L':['789','L'],'-PINK-XL':['101','XL']}.items():
         ws['A%d'%(i)]='qap-dh-'+randstr
         ws['B%d'%(i)]='qap-dh-'+randstr+k
-        ws['C%d'%(i)]='h-'+randstr+str(v)
-        ws['D%d'%(i)]=ws['D2'].value
+        ws['C%d'%(i)]='h-'+randstr+v[0]
+        ws['D%d'%(i)]=first_row_cache[3]
         ws['E%d'%(i)]=0
         ws['F%d'%(i)]='CN'
         ws['H%d'%(i)]=0
-        ws['I%d'%(i)]=ws['I2'].value
+        ws['I%d'%(i)]=first_row_cache[8]
         ws['O%d'%(i)]=0
-        ws['P%d'%(i)]=ws['P2'].value
-        ws['Q%d'%(i)]=ws['Q2'].value
-        ws['V%d'%(i)]=ws['V2'].value
-        ws['W%d'%(i)]=ws['W2'].value
-        ws['X%d'%(i)]=ws['X2'].value
-        ws['Y%d'%(i)]=ws['Y2'].value
-        ws['Z%d'%(i)]=ws['Z2'].value
-        ws['AA%d'%(i)]=ws['AA2'].value
-        ws['AB%d'%(i)]=ws['AB2'].value
-        ws['AC%d'%(i)]=ws['AC2'].value
-        ws['AD%d'%(i)]=ws['AC2'].value
-        ws['AE%d'%(i)]=ws['AE2'].value
-        ws['AF%d'%(i)]=ws['AF2'].value
-        ws['AG%d'%(i)]=ws['AG2'].value
-        ws['AH%d'%(i)]=ws['AH2'].value
-        ws['AI%d'%(i)]=ws['AI2'].value
-        ws['AJ%d'%(i)]=ws['AJ2'].value
+        ws['P%d'%(i)]=first_row_cache[15]
+        ws['Q%d'%(i)]=first_row_cache[16]
+        ws['V%d'%(i)]=first_row_cache[21]
+        ws['W%d'%(i)]=v[1]
+        ws['X%d'%(i)]=first_row_cache[23]
+        ws['Y%d'%(i)]=first_row_cache[24]
+        ws['Z%d'%(i)]=first_row_cache[25]
+        ws['AA%d'%(i)]=first_row_cache[26]
+        ws['AB%d'%(i)]=first_row_cache[27]
+        ws['AC%d'%(i)]=first_row_cache[28]
+        ws['AD%d'%(i)]=first_row_cache[29]
+        ws['AE%d'%(i)]=first_row_cache[30]
+        ws['AF%d'%(i)]=first_row_cache[31]
+        ws['AG%d'%(i)]=first_row_cache[32]
+        ws['AH%d'%(i)]=first_row_cache[33]
+        ws['AI%d'%(i)]=first_row_cache[34]
+        ws['AJ%d'%(i)]=first_row_cache[35]
         ws['AK%d'%(i)]=0
         ws['AL%d'%(i)]=1
         # ws['AM%d'%(i)]='Active'
@@ -82,22 +103,6 @@ for i in range(exist_count+1,exist_count+howmanynewproducts+1,4):
         # print ('i in dic loop is: ',i)
     # print ('i in outer loop is:',i)
 
-print ('final i:',i)
+print ('final i:',i-1)
 
-# print the value of a specif row
-# def iter_all_strings():
-#     size = 1
-#     while True:
-#         for s in itertools.product(ascii_uppercase, repeat=size):
-#             yield "".join(s)
-#         size +=1
-#
-# printlist=[]
-# for s in itertools.islice(iter_all_strings(), 39):
-#     printlist.append(s)
-#
-# for s in printlist:
-#     print (ws['%s%d'%(s,i-1)].value)
-# #######################################
-
-wb.save('dataheavy_products_py.xlsx')
+wb.save('dataheavy_product_verify.xlsx')
