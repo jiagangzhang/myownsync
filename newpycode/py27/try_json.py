@@ -1,29 +1,66 @@
 import requests
-import codecs,random
+import codecs,random, re
 
-token='11'
-url='http://test-mm.eastasia.cloudapp.azure.com/api'
 
+
+token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxZmNhMmI5My1jM2U1LTExZTUtOTE5NS0wNmU1MTdjMGExMTMiLCJVc2VyS2V5IjoiMWZjYTJiOTMtYzNlNS0xMWU1LTkxOTUtMDZlNTE3YzBhMTEzIiwiaWF0IjoxNDgwMzg0MTIxLCJleHAiOjE0ODI5NzYxMjF9.LDX-KltwupSFvXYCTUjSeLYI1B1X_OVg0K4M05WKfyY'
+# url='http://test-mm.eastasia.cloudapp.azure.com/api'
+url='https://uat-lw.mymm.com/api'
 if not token:
     api='/auth/login'
-    payload={'Username':'perm-mm','Password':'Bart'}
+    payload={'Username':'qap-dh-213519v5Gn','Password':'Bart'}
     r=requests.post(url+api,data=payload)
+    print r.text
     token=r.json()['Token']
     print token
 # print token
 
-api='/search/style'
-params={'cc': 'CHS', 'pageno':1,'pagesize':50, 'merchantid':1, 'notsoldout':'true'}
-r=requests.get(url+api,params=params)
-print r.status_code
+api='/user/list/mm'
+# params={'page':1,'size':howManyUsers, 'search':'qap', 'reverse':'true','statusid':2}
+headers = {'Authorization': token}
+r=requests.get(url+api,headers=headers)
+print 'status code',r.status_code
 # print r.text
-data=r.json()
-randome_style=random.randrange(0,len(data['PageData']))
-print randome_style
-get_ReviewStyleCode=data['PageData'][randome_style]['StyleCode']
-get_ReviewStyleId=data['PageData'][randome_style]['StyleId']
-print get_ReviewStyleCode
-print get_ReviewStyleId
+
+qap_user = re.findall(r'qap\w{12}', r.text)
+print len(qap_user)
+for i in range(1000):
+    print qap_user[i]
+
+
+howManyUsers=5000
+
+###### list users and select random from , backup for locust login########
+# api='/user/list/consumer'
+# params={'page':1,'size':howManyUsers, 'search':'qap', 'reverse':'true','statusid':2}
+# headers = {'Authorization': token}
+# r=requests.get(url+api,params=params,headers=headers)
+# print 'status code',r.status_code
+# # print r.text
+# data=r.json()['PageData']
+# print len(data)
+# # print data
+# try:
+#     user_list=[]
+#     for i in range(howManyUsers):
+#         user_list.append(data[i]['UserName'])
+#
+#     print len(user_list)
+#     print user_list[random.randrange(0,howManyUsers)]
+# except:
+#     print 'fail'
+#     pass
+# randome_style=random.randrange(0,len(data))
+# print randome_style
+########################################################
+
+# get_ReviewStyleCode=data['PageData'][randome_style]['StyleCode']
+# get_ReviewStyleId=data['PageData'][randome_style]['StyleId']
+# print get_ReviewStyleCode
+# print get_ReviewStyleId
+
+
+
 # api_2='/api/product/style/view'
 # params={'cc': 'CHS', 'merchantid': 1,'stylecode':'MJ00206'}
 # headers = {'Authorization': token}
