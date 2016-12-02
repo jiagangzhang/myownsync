@@ -126,7 +126,7 @@ class cart_wishlist_ShopCart(TaskSet):
         self.interrupt()
 
     @task(1)
-    def add_to_cart(self):
+    def add_to_cart_update_quantity(self):
         api='/cart/item/add'
         payload={"CultureCode":"CHS","Qty":random.randint(1,5),"SkuId":"55153","UserKey":self.user_key} # change the SkuId later
         r=self.client.post(api,data=payload)
@@ -140,15 +140,29 @@ class cart_wishlist_ShopCart(TaskSet):
 
     @task
     def cart_moveto_wishlist(self):
-        api=
+        api = '/cart/view/user'
+        params = {'cc': 'CHS','userkey':self.user_key}
+        r = self.client.get(api,params=params,name=api)
+        print_task(api)
+        if (r.json() is not None) and (len(r.json()['ItemList'])>0) :
+            CartItemId=r.json()['ItemList'][0]['CartItemId']
+            api='/cart/item/move/wishlist'
+            payload={"CartItemId":CartItemId,"CultureCode":"CHS","SkuId":"55153",'IsSpecificSku':1,"UserKey":self.user_key} # change the SkuId later
+            r=self.client.post(api,data=payload)
+            print_task(api)
+            CartKey = r.json()['CartKey']
+            api='/wishlist/view'
+            params={'cc': 'CHS', 'cartkey': CartKey}
+            r=self.client.get(api,params=params,name=api)
+            print_task(api)
+            print r.text
 
-    @task
-    def update_cart_quantity(self):
-        api='/'
+
 
     def on_start(self):
         if len(userkey_token) < 50:
             self.user_key,self.user_token = get_token()
+            print_task('/auth/login')
         else:
             self.user_key = random.choice(list(userkey_token.keys()))
             self.user_token = userkey_token[self.user_key]

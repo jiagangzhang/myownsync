@@ -1,0 +1,99 @@
+scp -i ~/keys/QA_Team.pem /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts/analytics.jmx mmadmin@122.112.213.135:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts/analytics.jmx
+
+scp -i ~/keys/QA_Team.pem /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts/analytics.jmx root@122.112.219.29:/root/enochzheng/mm-qa-performance-tests/scripts/analytics.jmx
+
+scp -i ~/keys/QA_Team.pem /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts/analytics.jmx root@122.112.219.12:/root/enochzheng/mm-qa-performance-tests/scripts/analytics.jmx
+
+122.112.210.235  	east04
+122.112.210.236		east05
+122.112.210.237		east06
+122.112.210.240		east07
+122.112.210.241		east08
+122.112.210.242		east09
+122.112.210.247		east10
+
+
+122.112.210.53  	east11
+122.112.210.54  	east12
+122.112.210.55  	east13
+122.112.210.57  	east14
+122.112.210.58  	east15
+122.112.210.59  	east16
+122.112.210.60  	east17
+122.112.210.61  	east18
+122.112.210.62  	east19
+122.112.210.63  	east20
+
+122.112.210.235		east04
+122.112.232.177		east05
+122.112.232.178		east06
+122.112.232.179		east07
+122.112.232.180		east08
+
+122.112.232.182		east09
+122.112.232.183		east10
+122.112.232.184		east11
+122.112.232.187		east12
+122.112.232.188		east13
+122.112.232.189		east14
+122.112.232.190		east15
+122.112.232.194		east16
+122.112.232.197		east17
+
+122.112.232.215		east18
+122.112.232.220		east19
+122.112.232.21		east20
+
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.210.235
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.177
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.178
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.179
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.180
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.182
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.183
+
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.184
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.187
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.188
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.189
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.190
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.194
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.197
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.215
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.220
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.21
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.235:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.236:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.237:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.240:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.241:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.242:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.247:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.53:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.54:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.55:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.57:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.58:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.59:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.60:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.61:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.62:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
+
+scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.63:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
