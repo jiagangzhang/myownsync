@@ -24,44 +24,46 @@ scp -i ~/keys/QA_Team.pem /Users/jiagangzhang/workspace/mm-qa-performance-tests/
 122.112.210.62  	east19
 122.112.210.63  	east20
 
-122.112.210.235		east04
-122.112.232.177		east05
-122.112.232.178		east06
-122.112.232.179		east07
-122.112.232.180		east08
+122.112.233.16			east04
+122.112.233.141			east05
+122.112.233.142			east06
+122.112.233.144			east07
+122.112.233.145			east08
+122.112.233.146			east09
+122.112.233.147			east10
 
-122.112.232.182		east09
-122.112.232.183		east10
-122.112.232.184		east11
-122.112.232.187		east12
-122.112.232.188		east13
-122.112.232.189		east14
-122.112.232.190		east15
-122.112.232.194		east16
-122.112.232.197		east17
 
-122.112.232.215		east18
-122.112.232.220		east19
-122.112.232.21		east20
 
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.210.235
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.177
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.178
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.179
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.180
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.182
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.183
+122.112.233.148			east11
+122.112.233.149			east12
+122.112.233.150			east13
+122.112.233.153			east14
+122.112.233.154			east15
+122.112.233.155			east16
+122.112.233.157			east17
+122.112.233.158			east18
+122.112.233.159			east19
+122.112.233.161			east20
+122.112.233.162			east21
 
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.184
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.187
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.188
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.189
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.190
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.194
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.197
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.215
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.220
-ssh -i ~/keys/QA_Team.pem mmadmin@122.112.232.21
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.16
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.141
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.142
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.144
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.145
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.146
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.147
+
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.148
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.149
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.150
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.153
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.154
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.155
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.157
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.233.158
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.210.240	
+ssh -i ~/keys/QA_Team.pem mmadmin@122.112.210.211	
 
 scp -i ~/keys/QA_Team.pem -r /Users/jiagangzhang/workspace/mm-qa-performance-tests/scripts mmadmin@122.112.210.235:/home/mmadmin/enochzheng/mm-qa-performance-tests/scripts
 
