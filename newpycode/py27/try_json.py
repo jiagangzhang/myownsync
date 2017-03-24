@@ -1,31 +1,35 @@
 import requests
 import codecs,random, re
 
+token=''
 
 
-token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxZmNhMmI5My1jM2U1LTExZTUtOTE5NS0wNmU1MTdjMGExMTMiLCJVc2VyS2V5IjoiMWZjYTJiOTMtYzNlNS0xMWU1LTkxOTUtMDZlNTE3YzBhMTEzIiwiaWF0IjoxNDgwMzg0MTIxLCJleHAiOjE0ODI5NzYxMjF9.LDX-KltwupSFvXYCTUjSeLYI1B1X_OVg0K4M05WKfyY'
-# url='http://test-mm.eastasia.cloudapp.azure.com/api'
-url='https://uat-lw.mymm.com/api'
+# token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxZmNhMmI5My1jM2U1LTExZTUtOTE5NS0wNmU1MTdjMGExMTMiLCJVc2VyS2V5IjoiMWZjYTJiOTMtYzNlNS0xMWU1LTkxOTUtMDZlNTE3YzBhMTEzIiwiaWF0IjoxNDgwMzg0MTIxLCJleHAiOjE0ODI5NzYxMjF9.LDX-KltwupSFvXYCTUjSeLYI1B1X_OVg0K4M05WKfyY'
+url='http://test-mm.eastasia.cloudapp.azure.com/api'
+# url='https://uat-lw.mymm.com/api'
 if not token:
     api='/auth/login'
-    payload={'Username':'qap-dh-213519v5Gn','Password':'Bart'}
+    payload={'Username':'qa13811122213','Password':'Bart'}
     r=requests.post(url+api,data=payload)
     print r.text
     token=r.json()['Token']
     print token
 # print token
 
-api='/user/list/mm'
-# params={'page':1,'size':howManyUsers, 'search':'qap', 'reverse':'true','statusid':2}
-headers = {'Authorization': token}
-r=requests.get(url+api,headers=headers)
-print 'status code',r.status_code
-# print r.text
+for i in range(2):
+    api='/order/create'
+    # params={'page':1,'size':howManyUsers, 'search':'qap', 'reverse':'true','statusid':2}
+    payload={'Skus':[{'SkuId':763989,'Qty':random.choice(range(1,4))}],'Orders':[{'Comments':'','CouponReference':'','MerchantId':261218}],'IsCart':'false','CultureCode':'CHS','UserAddressKey':'756c1278-db62-4984-a654-ddefefddecf9','MMCouponReference':'','UserKey':'7c91c4cc-32ca-42fb-bb35-7df544626eb8','cc':'CHS'}
+    headers = {'Authorization': token}
+    r=requests.post(url+api,headers=headers,data=payload)
+    print 'status code',r.status_code
+    print 'response', r.text
+    # print r.text
 
-qap_user = re.findall(r'qap\w{12}', r.text)
-print len(qap_user)
-for i in range(1000):
-    print qap_user[i]
+# qap_user = re.findall(r'qap\w{12}', r.text)
+# print len(qap_user)
+# for i in range(1000):
+#     print qap_user[i]
 
 
 howManyUsers=5000
