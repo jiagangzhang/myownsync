@@ -45,7 +45,7 @@ paylo='''{
 # sock.send(msg)
 # sock.send(wspy.Frame(wspy.OPCODE_TEXT, deflate(paylo) ,mask=True, rsv1=True))
 # print wspy.Frame(wspy.OPCODE_TEXT, paylo ,mask=True, rsv1=True).rsv1
-msg=wspy.message.create_message(0x1,paylo)
+msg=create_message(0x1,paylo)
 # print msg
 conn.send(msg,mask=True)
 print 'sent announce'
@@ -76,7 +76,7 @@ paylo='''{
   "CorrelationKey": "96292c1d-6106-4b8c-9dcb-60a8e3fa22c9"
 }
 '''
-msg=wspy.message.create_message(0x1,paylo)
+msg=create_message(0x1,paylo)
 # print msg
 conn.send(msg,mask=True)
 print 'sent start'

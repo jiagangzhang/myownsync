@@ -1,3 +1,5 @@
+only python 2 supported
+
 start venv
 
 git clone https://github.com/jiagangzhang/wspy
