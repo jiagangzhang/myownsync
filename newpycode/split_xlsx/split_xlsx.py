@@ -7,11 +7,12 @@ from openpyxl import load_workbook
 
 
 filename = 'split-product'
-original_file='dataheavy_product_verify.xlsx'
+original_file='forward_25k.xlsx'
 file_count = 30
 # user_list=[]
 
-wb=load_workbook(filename=original_file,read_only=True)
+# wb=load_workbook(filename=original_file,read_only=True)
+wb=load_workbook(filename=original_file)
 ws=wb.active
 
 # with open(original_file) as f:
@@ -51,9 +52,9 @@ def generate_columnlist(opt=39):
     return columnlist
 
 # cache the format of excel of the first row if delete all existing records
-def cache_row(n=1):
+def cache_row(n=1, row_size=[]):
     cache=[]
-    for s in generate_columnlist():
+    for s in row_size:
         cache.append(ws['%s%d'%(s,n)].value)
     return cache
 
@@ -75,21 +76,32 @@ def main():
     exist_count=count_exist_rows()
     print ('\n\tExist:',exist_count)
     how_many_rows_per_file = int(math.floor(exist_count/howmanynewfiles))
+    print ('how_many_rows_per_file',how_many_rows_per_file)
+    columns=generate_columnlist()
+    template_row=cache_row(1,columns)
 
-    template_row=cache_row(1)
-    row_counter=2
+    row_counter=0
     for i in range(1,howmanynewfiles+1):
         wb_new=Workbook()
-        ws_new=wb_new.create_sheet()
+        # ws_new=wb_new.create_sheet()
+        ws_new=wb_new.active
 
         # fill in data
         ws_new.append(template_row)
+        for row in range(2,how_many_rows_per_file + 2):
+            for col in range(1,len(columns)):
+                ws_new.cell(row=row,column=col).value=ws.cell(row=row+row_counter,column=col).value
+            # ws_new.append(cache_row(row,columns))
+            # col_d = ws[row] # 0-indexing
+            # for idx, cell in enumerate(col_d, 1):
+            #     ws_new.cell(row=idx, column=4).value = cell.value #1-indexing
         # for row in range(row_counter,how_many_rows_per_file + row_counter):
         #     ws_new.append(ws[row])
         #     print(row)
-        ws_new[2:5]=ws[2:5]
+        # ws_new[2:5]=ws[2:5]
 
-        row_counter=row_counter+how_many_rows_per_file*i
+        row_counter=row_counter+how_many_rows_per_file
+        print (row_counter)
         print(filename+'-'+str(i))
         wb_new.save(filename+'-'+str(i)+'.xlsx')
 
