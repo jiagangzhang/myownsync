@@ -5,13 +5,15 @@ import ssl
 from wspy.deflate_message import DeflateMessage
 from wspy.message import create_message
 import zlib
-		
-Ext=DeflateMessage()
-Ext.request={'client_max_window_bits': zlib.MAX_WBITS,
-        'client_no_context_takeover': False}
+
+Ext = DeflateMessage()
+Ext.request = {'client_max_window_bits': zlib.MAX_WBITS,
+               'client_no_context_takeover': False}
+
 
 class NewClient(wspy.Connection):
-	pass
+    pass
+
 
 # def deflate(data):
 # 	defl=zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION,
@@ -21,18 +23,18 @@ class NewClient(wspy.Connection):
 # 	assert compressed[-4:] == '\x00\x00\xff\xff'
 # 	return compressed[:-4]
 
-sock=wspy.websocket(origin='https://www.websocket.org',extensions=[Ext])
+sock = wspy.websocket(origin='https://www.websocket.org', extensions=[Ext])
 sock.enable_ssl()
-sock.connect(('mobile-mm.eastasia.cloudapp.azure.com',7600))
+sock.connect(('mobile-mm.eastasia.cloudapp.azure.com', 7600))
 # sock.connect(('echo.websocket.org',80))
 # sock.send(wspy.Frame(wspy.OPCODE_TEXT,'hello'))
 # response=sock.recv()
 # print response
 
-conn=NewClient(sock)
+conn = NewClient(sock)
 # conn.send(wspy.TextMessage('hello'))
 
-paylo='''{
+paylo = '''{
   "Type": "Announce",
   "SenderUserKey": "0e152fb4-ed0f-11e6-a1fc-acbc32d426e5",
   "Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIwZTE1MmZiNC1lZDBmLTExZTYtYTFmYy1hY2JjMzJkNDI2ZTUiLCJVc2VyS2V5IjoiMGUxNTJmYjQtZWQwZi0xMWU2LWExZmMtYWNiYzMyZDQyNmU1IiwiaWF0IjoxNDg2Njk4Nzc2LCJleHAiOjE0ODkyOTA3NzZ9.8V9YTCZtqq43H8oS4zXQixrS9zVUB_hBe49hgwpW2BY",
@@ -45,19 +47,19 @@ paylo='''{
 # sock.send(msg)
 # sock.send(wspy.Frame(wspy.OPCODE_TEXT, deflate(paylo) ,mask=True, rsv1=True))
 # print wspy.Frame(wspy.OPCODE_TEXT, paylo ,mask=True, rsv1=True).rsv1
-msg=wspy.message.create_message(0x1,paylo)
+msg = create_message(0x1, paylo)
 # print msg
-conn.send(msg,mask=True)
+conn.send(msg, mask=True)
 print 'sent announce'
-response1=conn.recv()
-response2=conn.recv()
+response1 = conn.recv()
+response2 = conn.recv()
 # print response
 # print response1
 # print response2
 # print type(response2)
 # print response2.payload
 
-paylo='''{
+paylo = '''{
   "Type": "ConvStart",
   "ConvType": "Private",
   "Queue": "General",
@@ -76,12 +78,12 @@ paylo='''{
   "CorrelationKey": "96292c1d-6106-4b8c-9dcb-60a8e3fa22c9"
 }
 '''
-msg=wspy.message.create_message(0x1,paylo)
+msg = create_message(0x1, paylo)
 # print msg
-conn.send(msg,mask=True)
+conn.send(msg, mask=True)
 print 'sent start'
-response1=conn.recv()
-response2=conn.recv()
+response1 = conn.recv()
+response2 = conn.recv()
 print response1.payload
 print response2.payload
 # print 'closing'

@@ -84,5 +84,5 @@ response1=conn.recv()
 response2=conn.recv()
 print response1.payload
 print response2.payload
-# print 'closing'
-# conn.close(reason='close')
+print 'closing'
+conn.close(reason='close')

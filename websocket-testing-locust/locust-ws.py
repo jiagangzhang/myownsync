@@ -71,7 +71,7 @@ class simple_ws(TaskSet):
 		  "Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIwZTE1MmZiNC1lZDBmLTExZTYtYTFmYy1hY2JjMzJkNDI2ZTUiLCJVc2VyS2V5IjoiMGUxNTJmYjQtZWQwZi0xMWU2LWExZmMtYWNiYzMyZDQyNmU1IiwiaWF0IjoxNDg2Njk4Nzc2LCJleHAiOjE0ODkyOTA3NzZ9.8V9YTCZtqq43H8oS4zXQixrS9zVUB_hBe49hgwpW2BY",
 		  "CorrelationKey": "78c963e0-3183-43c7-8dbe-6692e32bcd45"
 		}'''
-		msg=wspy.message.create_message(0x1,paylo)
+		msg=create_message(0x1,paylo)
 		self.client.send(self.conn,msg,mask=True,name='Announce')
 		print_task ('sent hello')
 		resp1=self.client.receive(self.conn,name='Receive message 1')

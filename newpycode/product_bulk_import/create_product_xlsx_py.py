@@ -109,6 +109,7 @@ def main():
     for i in range(exist_count+2,exist_count+howmanynewproducts+2,4):
         randstr=''.join(random.choice('0123456789'+ascii_uppercase) for a in range(11))
         for k,v in {'-PINK-S':['123','S'],'-PINK-M':['456','M'],'-PINK-L':['789','L'],'-PINK-XL':['101','XL']}.items():
+            if i > exist_count+howmanynewproducts+1 : break
             ws['A%d'%(i)]='qap-dh-'+randstr
             ws['B%d'%(i)]='qap-dh-'+randstr+k
             ws['C%d'%(i)]='h-'+randstr+v[0]
@@ -123,9 +124,9 @@ def main():
             ws['V%d'%(i)]=template_row[21]
             ws['W%d'%(i)]=v[1]
             ws['X%d'%(i)]=template_row[23]
-            ws['Y%d'%(i)]=template_row[24]
-            ws['Z%d'%(i)]=template_row[25]
-            ws['AA%d'%(i)]=template_row[26]
+            ws['Y%d'%(i)]=template_row[24]+str(1000000+new_rows)
+            ws['Z%d'%(i)]=template_row[25]+str(2000000+new_rows)
+            ws['AA%d'%(i)]=template_row[26]+str(3000000+new_rows)
             ws['AB%d'%(i)]=template_row[27]
             ws['AC%d'%(i)]=template_row[28]
             ws['AD%d'%(i)]=template_row[29]
