@@ -6,35 +6,17 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 
 
-filename = 'split-product'
-original_file='forward_25k.xlsx'
+to_file = 'split-product'
+from_file='dataheavy_product_verify.xlsx'
 file_count = 30
-# user_list=[]
 
-# wb=load_workbook(filename=original_file,read_only=True)
-wb=load_workbook(filename=original_file)
-ws=wb.active
-
-# with open(original_file) as f:
-#     user_list=f.readlines()
-
-# how_many_users_per_csv = int(math.floor(len(user_list)/file_count))
-
-# for i in range(1,file_count+1):
-#     with open(filename+str(i)+'.csv','w') as fhand:
-#         fhand.write(user_list[0])
-#         for user in user_list[how_many_users_per_csv*(i-1)+2 : how_many_users_per_csv*i+2]:
-#             fhand.write(user)
-
-def count_exist_rows():
+def count_exist_rows(work_sheet):
     count=0
-    for row in ws.iter_rows(min_row=2, max_col=1):
+    for row in work_sheet.iter_rows(min_row=2, max_col=1):
         for cell in row:
             if cell.value and len(cell.value)>0:
-                # print(cell.value)
                 count+=1
     return count
-    # print ('Exist:',count)
 
 # generate a list of A to Z......Z
 def iter_all_strings():
@@ -52,13 +34,15 @@ def generate_columnlist(opt=39):
     return columnlist
 
 # cache the format of excel of the first row if delete all existing records
-def cache_row(n=1, row_size=[]):
+def cache_row(work_sheet,n=1, row_size=[]):
     cache=[]
     for s in row_size:
-        cache.append(ws['%s%d'%(s,n)].value)
+        cache.append(work_sheet['%s%d'%(s,n)].value)
     return cache
 
 def main():
+    original_file = from_file
+    filename = to_file
     args = sys.argv[1:]
     if not args:
       print ("will split to %d copies, if you want to specify number of copies, use 'python3 xxx.py numberofcopies'"%file_count)
@@ -70,20 +54,42 @@ def main():
               print ('\n\tWrong format\tuse python3 xxx.py numberofcopies')
               sys.exit(1)
       except:
-          print ("usage: Number. "+'Must specify a number')
+          print ("usage: [Number] [input File Name] [output File Name]. "+'Must specify an integer')
           sys.exit(1)
 
-    exist_count=count_exist_rows()
+    del args[0:1]
+    if not args:
+        print ('will split file %s into %d copies named %s-n'%(original_file,file_count,filename))
+    else:
+        original_file=str(args[0])
+        del args[0:1]
+        if not args:
+            print ('will split file %s into %d copies named %s-n'%(original_file,file_count,filename))
+        else:
+            filename=str(args[0])
+
+    print ('will split file %s into %d copies named %s-n'%(original_file,howmanynewfiles,filename))
+
+    try:
+        wb=load_workbook(filename=original_file)
+    except:
+        print ("File not exists or corrupted, please try again")
+        sys.exit(1)
+
+    # wb=load_workbook(filename=original_file,read_only=True)
+    ws=wb.active
+
+
+    exist_count=count_exist_rows(ws)
     print ('\n\tExist:',exist_count)
     how_many_rows_per_file = int(math.floor(exist_count/howmanynewfiles))
     print ('how_many_rows_per_file',how_many_rows_per_file)
     columns=generate_columnlist()
-    template_row=cache_row(1,columns)
+    template_row=cache_row(ws,1,columns)
 
     row_counter=0
     for i in range(1,howmanynewfiles+1):
         wb_new=Workbook()
-        # ws_new=wb_new.create_sheet()
         ws_new=wb_new.active
 
         # fill in data
