@@ -71,13 +71,16 @@ def main():
     print ('will split file %s into %d copies named %s-n'%(original_file,howmanynewfiles,filename))
 
     try:
-        wb=load_workbook(filename=original_file)
+        wb=load_workbook(filename=original_file,data_only = True)
     except:
         print ("File not exists or corrupted, please try again")
         sys.exit(1)
 
     # wb=load_workbook(filename=original_file,read_only=True)
     ws=wb.active
+    # print ws.title
+    ws_new_title=ws.title
+
 
 
     exist_count=count_exist_rows(ws)
@@ -109,6 +112,7 @@ def main():
         row_counter=row_counter+how_many_rows_per_file
         print (row_counter)
         print(filename+'-'+str(i))
+        ws_new.title = ws_new_title
         wb_new.save(filename+'-'+str(i)+'.xlsx')
 
 if __name__ == "__main__":
