@@ -98,7 +98,7 @@ def main():
         # fill in data
         ws_new.append(template_row)
         for row in range(2,how_many_rows_per_file + 2):
-            for col in range(1,len(columns)):
+            for col in range(1,len(columns)+1):
                 ws_new.cell(row=row,column=col).value=ws.cell(row=row+row_counter,column=col).value
             # ws_new.append(cache_row(row,columns))
             # col_d = ws[row] # 0-indexing

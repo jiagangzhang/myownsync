@@ -170,6 +170,7 @@ def main():
             # print ('i in dic loop is: ',i)
     # print ('i in outer loop is:',i)
     print ('\tNew Rows Created:',new_rows-1)
+    ws.title = 'SKU'
     wb.save('dataheavy_product_verify.xlsx')
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+use the following sql command under Sku table, then export as csv to be used by Python
+
+#SELECT SkuId FROM Sku WHERE StatusId = 2 AND StyleCode IN (SELECT StyleCode FROM Sku WHERE StatusId = 2 AND IsDefault =1) GROUP BY StyleId LIMIT 500;
+
+SELECT SkuId FROM Sku WHERE StatusId = 2 AND IsDefault = 1 GROUP BY StyleId LIMIT 500;
+
+#SELECT Sku.SkuId, Brand.BrandNameInvariant, Sku.`PriceRetail`,Sku.`PriceSale`
+	FROM Sku JOIN Brand ON Sku.BrandId = Brand.BrandId
+	WHERE Sku.StatusId = 2 AND Sku.IsDefault = 1
+	GROUP BY StyleId
+	LIMIT 500;
